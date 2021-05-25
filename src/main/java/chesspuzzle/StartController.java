@@ -29,8 +29,11 @@ public class StartController {
         }
         else {
             //fxmlLoader.setLocation(getClass().getResource("/chesspuzzle/game.fxml"));
-            Parent root = FXMLLoader.load(getClass().getResource("/chesspuzzle/game.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/chesspuzzle/game.fxml"));
+            Parent root = fxmlLoader.load();
             //fxmlLoader.<GameController>getController().setPlayerName(nameTextField.getText());
+            GameController gameController = fxmlLoader.<GameController>getController();
+            gameController.setPlayerName(nameTextField.getText());
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

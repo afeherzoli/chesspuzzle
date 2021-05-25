@@ -5,6 +5,8 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -30,14 +32,17 @@ public class GameController {
     @FXML
     private Label stepsLabel;
 
+    @FXML
+    private Button submitButton;
+
     private ChessPuzzleModel model = new ChessPuzzleModel();
 
-    private String playerName;
+    private StringProperty playerName = new SimpleStringProperty();
 
     private IntegerProperty steps = new SimpleIntegerProperty();
 
     public void setPlayerName(String text) {
-        this.playerName = text;
+        this.playerName.set(text);
     }
 
     @FXML
@@ -53,11 +58,13 @@ public class GameController {
                 Logger.debug("ciklus:{},{} bábu:{}",i,j, txt);
             }
         }
+        stepsLabel.textProperty().bind(Bindings.concat("Steps: ", steps));
+        steps.set(0);
     }
 
     private Text createTxt(int i, int j){
         var t = new Text(10,50,"");
-        t.setFont(new Font(72));
+        t.setFont(new Font(50));
         t.setWrappingWidth(200);
         t.setTextAlignment(TextAlignment.CENTER);
         //t.textProperty().bind(Bindings.convert(model.piecePropertyF(i,j)));
@@ -87,8 +94,10 @@ public class GameController {
         Logger.debug("Piece at {},{} pressed", row, col);
         if (model.canMove(row, col) && !model.isGameWon()){
             model.move(row, col);
+            steps.set(steps.get()+1);
             if(model.isGameWon()){
-                wonLabel.setText("You won!");
+                wonLabel.setText(String.format("%s won the game!", playerName.get()));
+                submitButton.setDisable(false);
             }
         }
         else{
