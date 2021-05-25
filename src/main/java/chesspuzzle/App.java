@@ -12,7 +12,7 @@ import java.io.IOException;
 
 /**
  * JavaFX App
- */
+
 public class App extends Application {
 
     private static Scene scene;
@@ -45,4 +45,17 @@ public class App extends Application {
         launch();
     }
 
+}*/
+
+public class App extends Application {
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/chesspuzzle/start.fxml"));
+        stage.setTitle("Chess puzzle");
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
+    }
 }

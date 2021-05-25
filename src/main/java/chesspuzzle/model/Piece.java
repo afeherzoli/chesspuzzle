@@ -1,10 +1,8 @@
-package chesspuzzle.state;
+package chesspuzzle.model;
 
 public enum Piece {
     EMPTY,
     KING,
     BISHOP,
-    ROOK;
-
-
+    ROOK
 }
