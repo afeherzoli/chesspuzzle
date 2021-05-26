@@ -1,1 +1,0 @@
-package chesspuzzle.results;

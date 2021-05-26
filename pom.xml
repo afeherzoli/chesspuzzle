@@ -4,10 +4,22 @@
     <groupId>chesspuzzle</groupId>
     <artifactId>chesspuzzle</artifactId>
     <version>1.0</version>
+    <packaging>jar</packaging>
+    <description>Puzzle game implemented in JavaFX based on the Model-View-Controller (MVC) architectural pattern.</description>
+    <developers>
+        <developer>
+            <name>Fehér Zoltán</name>
+            <email>afeherzoli@gmail.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <developerConnection>scm:git:https://github.com/afeherzoli/chesspuzzle</developerConnection>
+    </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <!--exec.mainClass>chesspuzzle.Main</exec.mainClass-->
     </properties>
     <dependencies>
         <dependency>
@@ -65,12 +77,6 @@
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.6.0</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
     <build>

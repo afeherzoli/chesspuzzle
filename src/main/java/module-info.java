@@ -4,6 +4,6 @@ module chesspuzzle {
     requires org.tinylog.api;
     requires lombok;
 
-    opens chesspuzzle.model;
+    opens chesspuzzle;
     exports chesspuzzle;
 }
