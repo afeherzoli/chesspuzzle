@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -24,10 +23,9 @@ public class StartController {
 
     @FXML
     public void startGame(ActionEvent actionEvent) throws IOException {
-        if(nameTextField.getText().isEmpty()){
+        if (nameTextField.getText().isEmpty()) {
             errorLabel.setText("A name must be given!");
-        }
-        else {
+        } else {
             //fxmlLoader.setLocation(getClass().getResource("/chesspuzzle/game.fxml"));
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/chesspuzzle/game.fxml"));
             Parent root = fxmlLoader.load();

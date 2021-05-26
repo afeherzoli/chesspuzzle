@@ -55,4 +55,5 @@ class ChessPuzzleModelTest {
                 {Piece.BISHOP, Piece.BISHOP, Piece.EMPTY},
                 {Piece.ROOK, Piece.ROOK, Piece.KING}}).isGameWon());
     }
+
 }
