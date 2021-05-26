@@ -5,5 +5,6 @@ module chesspuzzle {
     requires lombok;
 
     opens chesspuzzle;
+    opens chesspuzzle.model;
     exports chesspuzzle;
 }
