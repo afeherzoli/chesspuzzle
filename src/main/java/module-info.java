@@ -2,8 +2,8 @@ module chesspuzzle {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.tinylog.api;
-    requires javax.inject;
+    requires lombok;
 
-    opens chesspuzzle to javafx.fxml;
+    opens chesspuzzle.model;
     exports chesspuzzle;
 }

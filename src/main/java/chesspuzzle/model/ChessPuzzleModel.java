@@ -2,23 +2,77 @@ package chesspuzzle.model;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.ReadOnlyStringWrapper;
 
 public class ChessPuzzleModel {
 
     public static int ROWS = 2;
     public static int COLUMNS = 3;
 
+    public static final Piece[][] INITIAL = {
+            {Piece.KING, Piece.BISHOP, Piece.BISHOP},
+            {Piece.ROOK, Piece.ROOK, Piece.EMPTY}
+    };
+
     private ReadOnlyObjectWrapper <Piece>[][] board = new ReadOnlyObjectWrapper[ROWS][COLUMNS];
 
     public ChessPuzzleModel(){
-        board[0][0]= new ReadOnlyObjectWrapper<Piece>(Piece.KING);
-        board[0][1]= new ReadOnlyObjectWrapper<Piece>(Piece.BISHOP);
-        board[0][2]= new ReadOnlyObjectWrapper<Piece>(Piece.BISHOP);
-        board[1][0]= new ReadOnlyObjectWrapper<Piece>(Piece.ROOK);
-        board[1][1]= new ReadOnlyObjectWrapper<Piece>(Piece.ROOK);
-        board[1][2]= new ReadOnlyObjectWrapper<Piece>(Piece.EMPTY);
+        this(INITIAL);
+        /*board[0][0]= new ReadOnlyObjectWrapper<>(Piece.KING);
+        board[0][1]= new ReadOnlyObjectWrapper<>(Piece.BISHOP);
+        board[0][2]= new ReadOnlyObjectWrapper<>(Piece.BISHOP);
+        board[1][0]= new ReadOnlyObjectWrapper<>(Piece.ROOK);
+        board[1][1]= new ReadOnlyObjectWrapper<>(Piece.ROOK);
+        board[1][2]= new ReadOnlyObjectWrapper<>(Piece.EMPTY);*/
+    }
+
+    public ChessPuzzleModel(Piece[][] a){
+        if (!isValidBoard(a)){
+            throw new IllegalArgumentException();
+        }
+        initBoard(a);
+    }
+
+    private boolean isValidBoard(Piece[][] a){
+        if (a ==null || a.length != 2)
+            return false;
+        if (a[0].length != 3 || a[1].length != 3)
+            return false;
+        int king = 0;
+        int rook = 0;
+        int bishop = 0;
+        int empty = 0;
+        for (int i=0; i<ROWS; i++){
+            for (int j=0; j<COLUMNS; j++){
+                switch (a[i][j]){
+                    case KING: {
+                        king++;
+                        break;
+                    }
+                    case ROOK:{
+                        rook++;
+                        break;
+                    }
+                    case BISHOP:{
+                        bishop++;
+                        break;
+                    }
+                    case EMPTY:{
+                        empty++;
+                    }
+                }
+            }
+        }
+        return king == 1 && bishop == 2 && rook == 2 && empty == 1;
+
+    }
+
+    private void initBoard(Piece[][] a){
+        board[0][0]= new ReadOnlyObjectWrapper<>(a[0][0]);
+        board[0][1]= new ReadOnlyObjectWrapper<>(a[0][1]);
+        board[0][2]= new ReadOnlyObjectWrapper<>(a[0][2]);
+        board[1][0]= new ReadOnlyObjectWrapper<>(a[1][0]);
+        board[1][1]= new ReadOnlyObjectWrapper<>(a[1][1]);
+        board[1][2]= new ReadOnlyObjectWrapper<>(a[1][2]);
     }
 
     public ReadOnlyObjectProperty<Piece> pieceProperty(int i, int j){
@@ -29,9 +83,7 @@ public class ChessPuzzleModel {
     public boolean canMove(int i, int j){
         int emptyRow = emptyRow();
         int emptyCol = emptyCol();
-        if (board[i][j].get() == Piece.KING){
 
-        }
         switch (board[i][j].get()){
             case KING:{
                 return Math.abs(j - emptyCol) < 2;
@@ -84,10 +136,7 @@ public class ChessPuzzleModel {
     }
 
     public boolean isGameWon(){
-        if (board[0][0].get()==Piece.BISHOP && board[0][1].get()==Piece.BISHOP && board[0][2].get()==Piece.EMPTY
-            && board[1][0].get()==Piece.ROOK && board[1][1].get()==Piece.ROOK && board[1][2].get()==Piece.KING)
-            return true;
-        else
-            return false;
+        return board[0][0].get() == Piece.BISHOP && board[0][1].get() == Piece.BISHOP && board[0][2].get() == Piece.EMPTY
+                && board[1][0].get() == Piece.ROOK && board[1][1].get() == Piece.ROOK && board[1][2].get() == Piece.KING;
     }
 }
