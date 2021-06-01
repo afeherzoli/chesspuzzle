@@ -3,7 +3,6 @@ package chesspuzzle.results;
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 import java.time.LocalDateTime;
-import java.time.Year;
 
 public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime> {
 
