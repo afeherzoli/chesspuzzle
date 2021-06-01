@@ -1,6 +1,5 @@
 package chesspuzzle.jaxb;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
 

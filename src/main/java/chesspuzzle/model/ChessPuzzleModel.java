@@ -135,7 +135,7 @@ public class ChessPuzzleModel {
     }
 
     /**
-     * {@return} the column index of the empty space.
+     * {@return the column index of the empty space.}
      */
     public int emptyCol() {
         for (int i = 0; i < ROWS; i++) {
@@ -173,7 +173,7 @@ public class ChessPuzzleModel {
 
     /**
      * Return whether the pieces are in the game winning position.
-     * @return {@code true} if board is in winning position, else {@code false}
+     * @return {@code true} if board is in winning position, {@code false} otherwise
      */
     public boolean isGameWon() {
         return board[0][0].get() == Piece.BISHOP

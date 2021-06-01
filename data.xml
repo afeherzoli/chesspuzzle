@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <gameResults>
     <games>
-        <player>Zoli</player>
-        <steps>22</steps>
+        <player>asd</player>
+        <steps>12</steps>
     </games>
     <games>
-        <player>Zoli</player>
-        <steps>22</steps>
+        <player>asd</player>
+        <steps>12</steps>
     </games>
     <games>
-        <player>Zoli</player>
-        <steps>22</steps>
+        <player>asd</player>
+        <steps>14</steps>
+    </games>
+    <games>
+        <player>asd</player>
+        <steps>14</steps>
+    </games>
+    <games>
+        <player>Pikk</player>
+        <steps>18</steps>
+    </games>
+    <games>
+        <player>Pikk</player>
+        <steps>18</steps>
+    </games>
+    <games>
+        <player>Pikk</player>
+        <steps>24</steps>
+    </games>
+    <games>
+        <player>asd</player>
+        <steps>31</steps>
+    </games>
+    <games>
+        <player>asd</player>
+        <steps>32</steps>
+    </games>
+    <games>
+        <player>Pikk</player>
+        <steps>36</steps>
+    </games>
+    <games>
+        <player>asd</player>
+        <steps>47</steps>
+    </games>
+    <games>
+        <player>Pikk</player>
+        <steps>54</steps>
     </games>
 </gameResults>

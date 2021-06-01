@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
-public class Game {
+public class Game implements Comparable<Game>{
 
     private String player;
     private int steps;
@@ -39,6 +39,13 @@ public class Game {
 
     public void setSteps(int steps){
         this.steps = steps;
+    }
+
+    @Override
+    public int compareTo(Game o) {
+         if(this.steps == o.steps) return 0;
+         else if(this.steps > o.steps) return 1;
+         else return -1;
     }
 
     /*@XmlElement(name = "time")

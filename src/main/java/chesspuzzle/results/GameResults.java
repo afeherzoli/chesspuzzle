@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement(name = "gameResults")
@@ -30,9 +31,11 @@ public class GameResults {
 
     public void addGame(Game game){
         this.games.add(game);
+        Collections.sort(this.games);
     }
 
     public String toString(){
         return "gameResults:\n"+games.toString();
     }
+
 }

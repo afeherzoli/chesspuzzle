@@ -36,7 +36,7 @@ public class StartController {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-            //App.setRoot("game");
+
             Logger.info("{} started a game",nameTextField.getText());
         }
     }

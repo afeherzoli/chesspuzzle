@@ -1,6 +1,10 @@
 package chesspuzzle.controller;
 
 
+import chesspuzzle.jaxb.JAXBHelper;
+import chesspuzzle.results.Game;
+import chesspuzzle.results.GameResults;
+import jakarta.xml.bind.JAXBException;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.IntegerProperty;
@@ -25,6 +29,8 @@ import org.tinylog.Logger;
 import chesspuzzle.model.ChessPuzzleModel;
 import chesspuzzle.model.Piece;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class GameController {
@@ -70,7 +76,6 @@ public class GameController {
         t.setFont(new Font(50));
         t.setWrappingWidth(200);
         t.setTextAlignment(TextAlignment.CENTER);
-        //t.textProperty().bind(Bindings.convert(model.piecePropertyF(i,j)));
         t.textProperty().bind(new ObjectBinding<String>() {
             {
                 super.bind(model.pieceProperty(i, j));
@@ -107,13 +112,24 @@ public class GameController {
         }
     }
 
-    public void showHighscores(ActionEvent actionEvent) throws IOException {
+    public void showHighscores(ActionEvent actionEvent) throws IOException, JAXBException {
+        var gameResults = JAXBHelper.fromXML(GameResults.class, new FileInputStream("data.xml"));
+        Game game = new Game();
+        game.setPlayer(playerName.get());
+        game.setSteps(steps.get());
+        //game.setTime(LocalDateTime.of(2020, 04, 12, 15, 22));
+
+        gameResults.addGame(game);
+        JAXBHelper.toXML(gameResults,new FileOutputStream("data.xml"));
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/chesspuzzle/highscore.fxml"));
         Parent root = fxmlLoader.load();
+        HighscoreController highscoreController = fxmlLoader.getController();
+        highscoreController.setPlayerName(playerName.get());
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
 
-        Logger.info("showing highscores");
+        Logger.info("Showing highscores");
     }
 }

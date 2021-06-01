@@ -5,6 +5,10 @@ import chesspuzzle.results.Game;
 import chesspuzzle.results.GameResultDao;
 import chesspuzzle.results.GameResults;
 import jakarta.xml.bind.JAXBException;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,13 +17,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import lombok.SneakyThrows;
 import org.tinylog.Logger;
 
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class HighscoreController {
     @FXML
@@ -34,45 +37,38 @@ public class HighscoreController {
     @FXML
     private TableColumn<GameResults, LocalDateTime> time;
 
+    private StringProperty playerName = new SimpleStringProperty();
+
     private GameResultDao gameResultDao;
 
+    public void setPlayerName(String text) {
+        this.playerName.set(text);
+    }
 
-    @SneakyThrows
     @FXML
-    private void initialize() throws FileNotFoundException, JAXBException{
+    private void initialize() throws FileNotFoundException, JAXBException {
+        Logger.debug("Loading highscores");
         var gameResults = JAXBHelper.fromXML(GameResults.class, new FileInputStream("data.xml"));
-        Game game = new Game();
-        game.setPlayer("Zoli");
-        game.setSteps(22);
-        //game.setTime(LocalDateTime.of(2020, 04, 12, 15, 22));
-
-        gameResults.addGame(game);
-
-        JAXBHelper.toXML(gameResults,new FileOutputStream("data.xml"));
-        //Logger.debug(JAXBHelper.fromXML(GameResults.class, getClass().getClassLoader().getResourceAsStream("/chesspuzzle/gameResults.xml")).toString());
-        //System.out.println(JAXBHelper.fromXML(GameResults.class, new FileInputStream("/gameResults.xml")).toString());
-
-        /*Logger.debug("Loading highscores");
-        System.out.println(JAXBHelper.fromXML(GameResults.class, new FileInputStream("/chesspuzzle/results/gameResults.xml")));
-        var games = JAXBHelper.fromXML(GameResults.class, new FileInputStream("/chesspuzzle/results/gameResults.xml"));
 
         player.setCellValueFactory(new PropertyValueFactory<>("player"));
-        player.setCellValueFactory(new PropertyValueFactory<>("steps"));
-        player.setCellValueFactory(new PropertyValueFactory<>("time"));
+        steps.setCellValueFactory(new PropertyValueFactory<>("steps"));
+        //player.setCellValueFactory(new PropertyValueFactory<>("time"));
 
         ObservableList<Game> observableList = FXCollections.observableArrayList();
-        observableList.addAll(games.getGames());
+        observableList.addAll(gameResults.getGames());
 
-        highscoreTable.setItems(observableList);*/
+        highscoreTable.setItems(observableList);
     }
 
     public void handleNewGame(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/chesspuzzle/game.fxml"));
         Parent root = fxmlLoader.load();
+        GameController gameController = fxmlLoader.getController();
+        gameController.setPlayerName(playerName.get());
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
-        //App.setRoot("game");
-        Logger.info("new game started");
+
+        Logger.info("{} started a new game", playerName.get());
     }
 }
