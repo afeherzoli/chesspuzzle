@@ -2,28 +2,31 @@ package chesspuzzle.results;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
+/**
+ * Class that represent one game played by a specific player.
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
 public class Game implements Comparable<Game>{
 
+    /**
+     * The name of the player;
+     */
     private String player;
+    /**
+     * The number of steps took the player to solve the puzzle.
+     */
     private int steps;
-    //private LocalDateTime time;
 
     public Game() {}
-    public Game(String player, int steps/*, LocalDateTime time*/){
+    public Game(String player, int steps){
         super();
         this.player = player;
         this.steps = steps;
-        //this.time = time;
     }
 
-    //@XmlElement(name = "player")
     public String getPlayer(){
         return player;
     }
@@ -32,7 +35,6 @@ public class Game implements Comparable<Game>{
         this.player = player;
     }
 
-    //@XmlElement(name = "steps")
     public int getSteps(){
         return steps;
     }
@@ -47,13 +49,4 @@ public class Game implements Comparable<Game>{
          else if(this.steps > o.steps) return 1;
          else return -1;
     }
-
-    /*@XmlElement(name = "time")
-    public LocalDateTime getTime(){
-        return time;
-    }
-
-    public void setTime(LocalDateTime time){
-        this.time = time;
-    }*/
 }

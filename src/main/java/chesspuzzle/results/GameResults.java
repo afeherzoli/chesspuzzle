@@ -2,7 +2,6 @@ package chesspuzzle.results;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Data;
 import lombok.Getter;
@@ -11,12 +10,18 @@ import lombok.Setter;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Class that represents all recorded games.
+ */
 @XmlRootElement(name = "gameResults")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Data
 @Setter
 @Getter
 public class GameResults {
+    /**
+     * List of the recorded games
+     */
     private List<Game> games;
 
     public GameResults() {}

@@ -2,7 +2,6 @@ package chesspuzzle.controller;
 
 import chesspuzzle.jaxb.JAXBHelper;
 import chesspuzzle.results.Game;
-import chesspuzzle.results.GameResultDao;
 import chesspuzzle.results.GameResults;
 import jakarta.xml.bind.JAXBException;
 import javafx.beans.property.SimpleStringProperty;
@@ -38,8 +37,6 @@ public class HighscoreController {
     private TableColumn<GameResults, LocalDateTime> time;
 
     private StringProperty playerName = new SimpleStringProperty();
-
-    private GameResultDao gameResultDao;
 
     public void setPlayerName(String text) {
         this.playerName.set(text);

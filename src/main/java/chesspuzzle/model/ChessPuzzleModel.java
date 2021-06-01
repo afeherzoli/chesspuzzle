@@ -8,7 +8,14 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
  */
 public class ChessPuzzleModel {
 
+    /**
+     * The number of rows on the board.
+     */
     public static int ROWS = 2;
+
+    /**
+     * The number of columns on the board.
+     */
     public static int COLUMNS = 3;
 
     /**
@@ -49,7 +56,7 @@ public class ChessPuzzleModel {
     }
 
     private boolean isValidBoard(Piece[][] a) {
-        if (a ==null || a.length != 2)
+        if (a == null || a.length != 2)
             return false;
         if (a[0].length != 3 || a[1].length != 3)
             return false;
@@ -82,24 +89,22 @@ public class ChessPuzzleModel {
     }
 
     private void initBoard(Piece[][] a) {
-        board[0][0]= new ReadOnlyObjectWrapper<>(a[0][0]);
-        board[0][1]= new ReadOnlyObjectWrapper<>(a[0][1]);
-        board[0][2]= new ReadOnlyObjectWrapper<>(a[0][2]);
-        board[1][0]= new ReadOnlyObjectWrapper<>(a[1][0]);
-        board[1][1]= new ReadOnlyObjectWrapper<>(a[1][1]);
-        board[1][2]= new ReadOnlyObjectWrapper<>(a[1][2]);
+        board[0][0] = new ReadOnlyObjectWrapper<>(a[0][0]);
+        board[0][1] = new ReadOnlyObjectWrapper<>(a[0][1]);
+        board[0][2] = new ReadOnlyObjectWrapper<>(a[0][2]);
+        board[1][0] = new ReadOnlyObjectWrapper<>(a[1][0]);
+        board[1][1] = new ReadOnlyObjectWrapper<>(a[1][1]);
+        board[1][2] = new ReadOnlyObjectWrapper<>(a[1][2]);
     }
-
 
     public ReadOnlyObjectProperty<Piece> pieceProperty(int i, int j) {
         return board[i][j].getReadOnlyProperty();
     }
 
     /**
-     * {@return if a piece in the given position can move to the empty space.}
-     *
      * @param i the row of the position
      * @param j the column of the position
+     * @return if a piece in the given position can move to the empty space.
      */
     public boolean canMove(int i, int j) {
         int emptyRow = emptyRow();
@@ -113,7 +118,7 @@ public class ChessPuzzleModel {
                 return Math.abs(i - emptyRow) == 1 && Math.abs(j - emptyCol) == 1;
             }
             case ROOK: {
-                return (Math.abs(i - emptyRow) == 1 && Math.abs(j - emptyCol) == 0 )
+                return (Math.abs(i - emptyRow) == 1 && Math.abs(j - emptyCol) == 0)
                         || (Math.abs(i - emptyRow) == 0 && Math.abs(j - emptyCol) == 1);
             }
         }
@@ -121,7 +126,7 @@ public class ChessPuzzleModel {
     }
 
     /**
-     * {@return the row index of the empty space.}
+     * {@return the row index of the empty space}.
      */
     public int emptyRow() {
         for (int i = 0; i < ROWS; i++) {
@@ -135,7 +140,7 @@ public class ChessPuzzleModel {
     }
 
     /**
-     * {@return the column index of the empty space.}
+     * {@return the column index of the empty space}.
      */
     public int emptyCol() {
         for (int i = 0; i < ROWS; i++) {
@@ -160,11 +165,9 @@ public class ChessPuzzleModel {
         if (canMove(i, j)) {
             if (board[i][j].get() == Piece.KING) {
                 board[emptyRow][emptyCol].set(Piece.KING);
-            }
-            else if (board[i][j].get() == Piece.BISHOP) {
+            } else if (board[i][j].get() == Piece.BISHOP) {
                 board[emptyRow][emptyCol].set(Piece.BISHOP);
-            }
-            else if  (board[i][j].get() == Piece.ROOK) {
+            } else if  (board[i][j].get() == Piece.ROOK) {
                 board[emptyRow][emptyCol].set(Piece.ROOK);
             }
         }
