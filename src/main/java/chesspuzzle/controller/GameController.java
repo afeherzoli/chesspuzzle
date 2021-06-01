@@ -1,4 +1,4 @@
-package chesspuzzle;
+package chesspuzzle.controller;
 
 
 import javafx.beans.binding.Bindings;
@@ -7,7 +7,12 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -15,9 +20,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import org.tinylog.Logger;
 import chesspuzzle.model.ChessPuzzleModel;
 import chesspuzzle.model.Piece;
+
+import java.io.IOException;
 
 public class GameController {
 
@@ -97,5 +105,15 @@ public class GameController {
         } else {
             Logger.debug("Piece at:{},{} cant move", row, col);
         }
+    }
+
+    public void showHighscores(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/chesspuzzle/highscore.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        Logger.info("showing highscores");
     }
 }

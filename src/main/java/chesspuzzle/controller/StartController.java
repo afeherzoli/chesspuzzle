@@ -1,5 +1,6 @@
-package chesspuzzle;
+package chesspuzzle.controller;
 
+import chesspuzzle.controller.GameController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

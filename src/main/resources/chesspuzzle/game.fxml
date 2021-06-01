@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chesspuzzle.GameController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chesspuzzle.controller.GameController">
    <Label fx:id="stepsLabel" text="0" />
    <Label fx:id="wonLabel" alignment="BOTTOM_CENTER" textAlignment="CENTER">
       <VBox.margin>
@@ -30,7 +30,7 @@
             <Insets bottom="150.0" top="100.0" />
          </VBox.margin>
     </GridPane>
-   <Button fx:id="submitButton" disable="true" mnemonicParsing="false" text="Submit" textAlignment="CENTER">
+   <Button fx:id="submitButton" onAction="#showHighscores" disable="true" mnemonicParsing="false" text="Submit" textAlignment="CENTER">
       <VBox.margin>
          <Insets left="270.0" />
       </VBox.margin>
